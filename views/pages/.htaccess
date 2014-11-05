@@ -1,0 +1,14 @@
+Options +FollowSymLinks
+RewriteEngine on
+RewriteCond %{THE_REQUEST} ^.*/index.html
+RewriteRule ^(.*)index.html$ http://www.kohistanlogistics.com/$1 [R=301,L]
+RewriteCond %{THE_REQUEST} ^.*/index.php
+RewriteRule ^(.*)index.php$ http://www.blacklimo.com/$1 [R=301,L]
+#RewriteBase /
+RewriteCond %{HTTP_HOST} ^kohistanlogistics.com [NC]
+
+RewriteRule ^(.*)$ http://www.kohistanlogistics.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(.*)\.kohistanlogistics\.com$ [NC]
+RewriteRule about-us/(.*).php subpage.php?subcat=$1 [NC]
+RewriteRule news/(.*).php newsdetail.php?id=$1 [NC]

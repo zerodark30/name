@@ -1,0 +1,178 @@
+
+<div class="page page-table" data-ng-controller="listDrivrCtrl">
+  <section>
+    <ul class="filters list-inline nav nav-tabs">
+        <li data-ng-class="{active: statusFilter == ''}">
+            <a href="" 
+               data-toggle="tab"
+               data-ng-click="filter('all')"
+               >Taxi Drivers</a>
+        </li>
+        <li data-ng-class="{active: statusFilter.completed == false }">
+            <a href=""
+               data-toggle="tab"
+               data-ng-click="filter('active')"
+               >Finance</a>
+        </li>
+        <li data-ng-class="{active: statusFilter.completed == true }">
+            <a href=""
+               data-toggle="tab"
+               data-ng-click="filter('completed')"
+               >Promotions</a>
+        </li>
+        <li data-ng-class="{active: statusFilter.completed == true }">
+            <a href=""
+               data-toggle="tab"
+               data-ng-click="filter('completed')"
+               >Users</a>
+        </li>
+        
+    </ul>
+  </section>
+  
+ 
+
+  <section  data-ng-cloak>
+    <ul class="task-list list-unstyled">
+     <li>
+      <section class="panel panel-default table-dynamic">
+        <div class="panel-heading">
+          <strong><span class="glyphicon glyphicon-th"></span> Dispatch </strong>
+          <ul style="float:right;position:relative;top:-6px;">
+           <li style="float:left;list-style: none outside none;border:1px solid #FFF"><a class="btn btn-info btn-direction" href=""><strong>Vehicle</strong></a></li>
+           <li style="float:left;list-style: none outside none;border:1px solid #FFF"><a class="btn btn-info btn-direction" href="#/addDriver"><strong>Add Driver</strong></a></li>
+           <li style="float:left;list-style: none outside none;border:1px solid #FFF"><a class="btn btn-info btn-direction"href=""><strong>Requests</strong></a></li>
+        </ul>
+        </div>
+
+        <div class="table-filters">
+            <div class="row">
+                <div class="col-sm-4 col-xs-6">
+                    <form>
+                        <input type="text"
+                               placeholder="search"
+                               class="form-control"
+                               data-ng-model="searchKeywords"
+                               data-ng-keyup="search()">
+                    </form>
+                </div>
+                <div class="col-sm-3 col-xs-6 filter-result-info">
+                    <span>
+                        
+                    </span>              
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped table-responsive" >
+            <thead>
+                <tr>
+                    <th><div class="th">
+                        Driver ID
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('name') "
+                              data-ng-class="{active: row == 'name'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-name') "
+                              data-ng-class="{active: row == '-name'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Driver Image
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('name') "
+                              data-ng-class="{active: row == 'name'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-name') "
+                              data-ng-class="{active: row == '-name'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Vehicle Type
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('price') "
+                              data-ng-class="{active: row == 'price'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-price') "
+                              data-ng-class="{active: row == '-price'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Rolling Rating
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('sales') "
+                              data-ng-class="{active: row == 'sales'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-sales') "
+                              data-ng-class="{active: row == '-sales'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Status
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('rating') "
+                              data-ng-class="{active: row == 'rating'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-rating') "
+                              data-ng-class="{active: row == '-rating'}"></span>
+                    </div></th> 
+
+                     <th><div class="th">
+                        Operation
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('rating') "
+                              data-ng-class="{active: row == 'rating'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-rating') "
+                              data-ng-class="{active: row == '-rating'}"></span>
+                    </div></th>  
+
+                </tr>
+            </thead>
+            <tbody> 
+            <p>{{data[0]._id}}</p>
+                <tr ng-repeat="items in data">
+                    <td>{{items.driver_age}}</td>
+                    <td width="120"><img src="images/g1.jpg" style="width:50px;"></td>
+                    <td>{{items.driver_age}}</td>
+                    <td>
+
+                    <a class="btn btn-primary btn-direction" href="javascript:;">{{items.driver_age}}</a>
+                    </td>
+                    <td width="146px">
+                      <button class="btn btn-w-md btn-gap-v btn-primary" type="button">Available</button>
+                    </td>
+                    <td width="146px">
+                      <a href=""> Bar</a> | <a href=""> Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <footer class="table-footer">
+            <div class="row">
+                <div class="col-md-6 page-num-info">
+                    <span>
+                        Show 
+                        <select data-ng-model="numPerPage"
+                                data-ng-options="num for num in numPerPageOpt"
+                                data-ng-change="onNumPerPageChange()">
+                        </select> 
+                        entries per page
+                    </span>
+                </div>
+                <div class="col-md-6 text-right pagination-container">
+                    <pagination class="pagination-sm"
+                                page="currentPage"
+                                total-items="filteredStores.length"
+                                max-size="4"
+                                on-select-page="select(page)"
+                                items-per-page="numPerPage"
+                                rotate="false"
+                                boundary-links="true"></pagination>
+                </div>
+            </div>
+        </footer>
+    </section>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+
+</div>

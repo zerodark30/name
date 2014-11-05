@@ -1,0 +1,488 @@
+<style>
+.name {
+  text-transform: capitalize;
+}
+.form-group {
+    clear: both;
+    margin-bottom: 15px;
+    padding-bottom: 30px;
+}.img-circle { border: 1px solid}
+</style>
+<div class="page" ng-controller="editDriverCtrl">
+ <form name="form" role="form" class="form-validation">
+
+
+    <section class="panel panel-default">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>
+         Add Driver</strong></div> 
+         <div class="panel-body"> 
+         <div class="col-md-6 ng-scope">
+
+                    <div class="row">
+                <div class="col-sm-6">
+                    <div class="panel mini-box">
+                        <span class="box-icon bg-success">
+                            <i class="fa fa-bookmark-o"></i>
+                        </span>
+                        <div class="box-info">
+                            <p class="size-h2">{{ rating }}</p>
+                            <p class="text-muted">Rating</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="panel mini-box">
+                        <span class="box-icon bg-info">
+                            <i class="fa fa-check"></i>
+                        </span>
+                        <div class="box-info">
+                            <p class="size-h2">{{driver.driver_status}}</p>
+                            <p class="text-muted">Status</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                     
+
+                      <div class="form-group">
+                          <div class="col-sm-3">
+                            <label for="call_sign">Call Sign <span style="color:red"> * </span></label>
+                          </div>
+                          <div class="col-sm-9">
+                            <input
+                                required 
+                              type="text" 
+                              class="form-control" 
+                              placeholder="Call Sign"
+                              name="call_sign"
+                              ng-model="driver.call_sign"
+                          >
+                           <div ng-show="form.call_sign.$dirty && form.call_sign.$invalid">
+                               <div ng-show="form.call_sign.$error.call_sign">Invalid Call Sign.</div>
+                                <div ng-show="form.call_sign.$error.required">Call Sign is required.
+                                </div>           
+                          </div>
+                        </div>
+                      </div>
+
+
+                       <div class="form-group">
+                          <div class="col-sm-3">
+                              <label for="call_sign">Title <span style="color:red"> * </span></label>
+                          </div>
+                          <div class="col-sm-9">
+                          <span class="ui-select">
+                            <select 
+                              name="driver_title"
+                              ng-model="driver.driver_title"
+                              >
+                              <option value="Mr" selected="">Mr</option>
+                              <option value="Mrs">Mrs</option>
+                              <option value="Miss">Miss</option>
+                              <option value="Ms">Ms</option>
+                              <option value="Dr">Dr</option>
+                          </select>
+                        </span>
+                            <div ng-show="form.driver_title.$dirty && form.driver_title.$invalid">
+                                <div ng-show="form.driver_title.$error.required">Title is required.</div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                   
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                            <label for="call_sign">First Name <span style="color:red"> * </span></label>
+                          </div>
+                           <div class="col-sm-9">
+                            <input
+                               required 
+                               type="text" 
+                               class="form-control name"
+                               name="first_name" 
+                               placeholder="First Name" 
+                               ng-model="driver.first_name"
+                            >
+                            <div ng-show="form.first_name.$dirty && form.first_name.$invalid">
+                               <div ng-show="form.first_name.$error.first_name">Invalid First Name.</div>
+                                <div ng-show="form.first_name.$error.required">First Name is required.
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                            <label for="last_name">Last Name <span style="color:red"> * </span></label>
+                          </div>
+                          <div class="col-sm-9">
+                            <input 
+                               required
+                               type="text" 
+                               class="form-control" 
+                               placeholder="Last Name" 
+                               name="last_name"
+                               ng-model="driver.last_name"
+                            >
+                            <div ng-show="form.last_name.$dirty && form.last_name.$invalid">
+                               <div ng-show="form.last_name.$error.last_name">Invalid Last Name.</div>
+                                <div ng-show="form.last_name.$error.required">Last Name is required.
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                         <dl class="dl-horizontal">
+                          <div class="col-sm-3">
+                            <label for="bio_description">Gender<span style="color:red"> * </span></label>
+                          </div>
+                         <div class="col-sm-3">
+                           <dd style="margin-left:1px;width:250px;">
+                             <label class="ui-radio">
+                                  <input 
+                                 name="radio1" 
+                                 type="radio" 
+                                 value="male" 
+                                 ng-model="driver.gender">
+                                <span>Male</span>
+                              </label>
+                             <label class="ui-radio">
+                                   <input 
+                                 name="radio1" 
+                                 type="radio" 
+                                 value="female" 
+                                 ng-model="driver.gender">
+                                 <span>Female</span>
+                             </label>
+                           </dd>
+                         </div>
+                        </dl>
+                         <span class="error" ng-show="form.gender.$error.required">
+                            <i class="fa fa-exclamation-circle"></i>Please select your Gender.
+                          </span>
+                        </div>
+                         <div class="form-group">
+                          <div class="col-sm-3">
+                               <label for="date_of_birth">Date Of Birth <span style="color:red"> * </span></label>
+                          </div>
+                            <div class="col-sm-3">
+                            <div class="input-group ui-datepicker">
+                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                           <input 
+                               type="text" 
+                               class="form-control"
+                               name="date_of_birth"
+                               datepicker-popup="{{format}}"
+                               ng-model="driver.date_of_birth"
+                               is-open="opened"
+                               min="minDate"
+                               max="'2015-06-22'"
+                               datepicker-options="dateOptions" 
+                               
+                               ng-required="true" 
+                               close-text="Close" required
+                               style="width:309px;"
+                               >
+                               <div ng-show="form.date_of_birth.$dirty && form.date_of_birth.$invalid">
+                                  <div ng-show="form.date_of_birth.$error.required">DOB is required.
+                                 </div>
+                               </div>
+                             </div>
+                           </div>
+                           </div>
+                            <div class="form-group">
+                          <div class="col-sm-3">
+                                 <label for="telephone">Telephone <span style="color:red"> * </span></label>
+                          </div>
+                      <div class="col-sm-9">
+                            <input 
+                               required
+                               type="text" 
+                               class="form-control" 
+                               placeholder="Telephone" 
+                               name="telephone"
+                               ng-pattern="/^\d{0,9}(\.\d{1,9})?$/"
+                               ng-model="driver.telephone">
+                              <div ng-show="form.telephone.$dirty">
+                                <div ng-show="form.telephone.$error.pattern">
+                                     Invalid Telephone.</div>
+                                <div ng-show="form.telephone.$error.required">telephone is required.</div>    
+                              </div>
+                            </div>
+                        </div>
+                         <br /><br /><br />
+                        <div class="form-group">
+                           <div class="col-sm-3">
+                            <label for="email">Email <span style="color:red"> * </span></label>
+                          </div>
+                           <div class="col-sm-9">
+                            <input 
+                               type="email" 
+                               class="form-control" 
+                               placeholder="Email"
+                               name="email" 
+                               ng-model="driver.email"
+                               ensure-unique-="email"                             >
+                             <div ng-show="form.email.$dirty && form.email.$invalid">
+                               <div ng-show="form.email.$error.email">Enter a valid Email.</div> 
+                               <small class="error" ng-show="form.email.$error.unique">This Email is already registered, please try another</small> 
+                            </div>
+                          </div>
+                        </div>
+                         <div class="form-group">
+                           <div class="col-sm-3">
+                            <label for="Password">Password <span style="color:red"> * </span></label>
+                          </div>
+                            <div class="col-sm-9">
+                            <input 
+                               type="password" 
+                               name="password" 
+                               ng-required=""
+                               class="form-control" 
+                               placeholder="Password should be alphanumeric"
+                               ng-model="driver.password"
+                               ng-pattern="/^[a-z0-9]+$/i"
+                               data-ng-minlength="8"
+                            >
+                            <div ng-show="form.password.$dirty && form.password.$invalid">
+                             <div ng-show="form.password.$error.password">Invalid Password.</div>
+                             <div ng-show="form.password.$error.required">Password is required.</div>
+                             <div ng-show="form.password.$error.pattern">Password must be alphanumeric.</div>
+                             <div ng-show="form.password.$error.minlength">Password is too short.</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                           <div class="col-sm-3">
+                           <label for="Verfiy password">Re-Password <span style="color:red"> * </span></label>
+                          </div>
+                            <div class="col-sm-9">
+                            <input 
+                               type="password"
+                               name="password2"  
+                               ng-required=""
+                               class="form-control" 
+                               placeholder="password"         
+                               ng-model="driver.password2"
+                            >
+                               <div ng-show="driver.password != driver.password2">Passwords do not match...</div>
+                             </div>
+                        </div>
+                         <br /><br /><br />
+                         <div class="form-group">
+                          <div class="col-sm-3">
+                     <label for="vehicle_list">Current Vehicle <span style="color:red"> </span></label>
+                          </div>
+                              <div class="col-sm-3">
+                            <div>Make:<b>{{str.make}}</b> <br /> Model:<b>{{str.model}}</b><br />Registration No.<b>{{str.registration_number}}</b></div>
+                          </div>
+
+
+                        </div>
+                           <div class="form-group">
+                           <div class="col-sm-3">
+                                   <label for="search">Search <span style="color:red"> </span></label>
+                          </div>
+                           <div class="col-sm-3">
+                             <input 
+                              type="text" 
+                              ng-model="search"
+                              class="form-control"
+                              placeholder="Search vehicle from dropdown" 
+                              style="width:347px" 
+                               >   
+                             </div>                         
+                           </div>
+                      <div class="form-group">
+                         <div class="col-sm-3">
+                           <label for="search">Vehicle <span style="color:red"> </span></label>
+                          </div>
+
+                         <div style="float:left;margin-left:3%;margin-top:-3%">
+                            <span class="ui-select">
+                            <select data-ng-model="driver.vehicleslist"
+                            data-ng-options="a.make+' '+  a.model +' (' + a.registration_number + ')' for a in vehicles| filter:search">    
+                            <option value="">Choose a vehicle</option>  
+                          </select> 
+
+                        </span>OR 
+                            <a class="btn btn-primary" ng-click="load_add_vehicles_view()"> Add New</a>
+                          </div>
+
+                               <div ng-dropdown-multiselect="" options="example5data" selected-model="example5model" extra-settings="example5settings" translation-texts="example5customTexts"></div>
+
+
+
+                        </div>
+                      <div class="form-group" style="height:108px;">
+                        <div class="col-sm-3">
+                              <label for="home_address1">Approved <span style="color:red">  </span></label>
+                          </div>
+                            <div class="col-sm-9">
+                            <textarea
+                              class="form-control" 
+                              rows="4" 
+                              name="home_address1" 
+                              ng-model="driver.home_address1" 
+                              placeholder="Approved"
+                              >
+                              </textarea>
+                          </div>
+                        </div>
+                          <div class="form-group">
+                           <div class="col-sm-3">
+                              <label for="pr">Priority <span style="color:red">  </span></label>
+                           </div>
+                            <div class="col-sm-3">
+                            <input 
+                                type="number" 
+                                ng-model="driver.priority" 
+                                placeholder="Priority should be between 1 to 10" 
+                                class="form-control"
+                                name="priority"
+                                data-min=1
+                                data-max=10
+                                style="width:347px;"
+                              >
+                           <div ng-show="form.priority.$dirty && form.priority.$invalid">
+                            <div ng-show="form.priority.$error.priority">Invalid Priority.</div>
+                            <div ng-show="form.priority.$error.min">Invalid priority.</div>
+                            <div ng-show="form.priority.$error.max">Invalid priority.</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                              <label for="bio_description">Bio Description <span style="color:red">  </span></label>
+                          </div>
+                         <div class="col-sm-3">
+                            <textarea 
+                              name="bio_description"
+                              class="form-control" 
+                              rows="4" 
+                              ng-model="driver.bio_description" 
+                              placeholder="Bio Description" style="width:600px;">
+                            </textarea>
+                            <div ng-show="form.bio_description.$dirty && form.bio_description.$invalid">
+                               <div ng-show="form.bio_description.$error.bio_description">Invalid Bio Description.</div>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                        <div class="col-md-6 ng-scope">
+                        <div class="form-group">
+                         <div style=" 
+         height: 170px;
+         margin: 0 auto;
+         width: 223px;">
+
+         <img class="img-circle" style="height:150px;width:150px" src="{{blob_id}}"  />
+
+   <div class="form-group" style="margin-top:4%">
+
+                             <input 
+                                class="btn-info" 
+                                type="file" 
+                                id="fileInput" 
+                                data-ui-file-upload="" 
+                                title="Choose File" 
+                                style="left: -153.5px; top: 19.95px;"
+                                ng-model="driver.file" 
+                                app-filereader >
+                             <button ng-click="upload(driver.file)">upload</button>
+                             <img src="images/spinner.gif" 
+                                  style="width: 22px; margin-left: 5px; display: none;" id="loading">
+                          <div class="space"></div>
+                      </div>
+
+
+         </div>
+                        </div>
+                        <div class="form-group">
+                        <div class="col-sm-3">
+                              <label for="home_address1">Line 1 <span style="color:red"> * </span></label>
+                          </div>
+                            <div class="col-sm-9">
+                            <input type="text"
+                              class="form-control" 
+                              name="home_address1" 
+                              ng-model="driver.home_address1" 
+                              placeholder="Home Address 1"
+                              >
+                            <div ng-show="form.home_address1.$dirty && form.home_address1.$invalid">
+                               <div ng-show="form.home_address1.$error.home_address1">Invalid Home Address.</div>
+                                <div ng-show="form.home_address1.$error.required">Home Address is required.
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                         <div class="col-sm-3">
+                              <label for="home_address2">Line 2</label>
+                          </div>
+                           <div class="col-sm-9">
+                            <input type="text" id="" class="form-control" 
+                             ng-model="driver.home_address2" placeholder="Home Address 2">
+                           </div>
+                        </div>
+                          <div class="form-group">
+                           <div class="col-sm-3">
+                                <label for="city">City <span style="color:red"> * </span></label>
+                          </div>
+                           <div class="col-sm-3">
+                           <input 
+                           name="home_address_city" 
+                           type="text" 
+                           class="form-control" 
+                           placeholder="Home Adress city"
+                           required 
+                           ng-model="driver.home_address_city"
+                           style="width:347px">
+                           <div ng-show="form.home_address_city.$dirty && form.home_address_city.$invalid">
+                               <div ng-show="form.home_address_city.$error.home_address_city">Invalid City.</div>
+                                <div ng-show="form.home_address_city.$error.required">City is required.
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                         <div class="form-group">
+                           <div class="col-sm-3">
+                                <label for="city">Post Code <span style="color:red"> * </span></label>
+                          </div>
+                           <div class="col-sm-3">
+                           <input 
+                           name="postcode" 
+                           type="text" 
+                           class="form-control" 
+                           placeholder="Post Code"
+                           ng-model="driver.postcode"
+                           style="width:347px;"
+                           >
+ 
+                          </div>
+                        </div>
+                        <!--
+                        <div class="form-group">
+                            <label for="driver_log">Log <span style="color:red"> * </span></label>
+                             <textarea 
+                               class="form-control" 
+                               rows="4" 
+                               name="driver_log" 
+                               ng-model="driver.driver_log" 
+                               placeholder="Log"
+                               ng-readonly="true"
+                               >
+                            </textarea>
+                          </div>
+                          -->
+                          </div>
+       </div>
+    </section>
+    
+    <section> 
+      <input type="hidden" value="active" ng-model="driver.active">
+       <button type="reset" class="btn btn-primary btn-w-lg">Cancel</button>
+      <button type="submit" class="btn btn-info btn-w-lg" ng-disabled="form.$dirty && form.$invalid"  ng-click="updateDriver(driver)">Save</button>
+    </section>
+  </form>
+</div>

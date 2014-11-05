@@ -1,0 +1,218 @@
+<style>
+.ngdialog.ngdialog-theme-plain .ngdialog-content {
+    background: rgba(255,255,255,.9);
+    padding: 0.2em 0.2em;
+    width: 845px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width:thick;
+    border-color: #5bc0de;
+}.ngdialog-overlay {
+width: 98%;
+}
+</style>
+    <div style="width: 800px;" class="container" ng-controller="FirmsAddCtrl">
+        <div style="width: 800px;" class="page-err">
+            <div style="width: 800px;" class="err-message text-center">
+                <h2 >Add new Firm</h2>
+            </div>
+            <div style="width: 800px;" class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>
+                        <span class="glyphicon glyphicon-th"></span>
+                        Firm details!
+                    </strong>
+                </div>
+                <div class="panel-body">
+                    <div class="media">
+                    <form name="form" role="form" class="form-validation">
+                        <div class="media-body">
+                            <ul class="list-unstyled list-info">
+                                <li>
+                                    <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Firm Name:</label>
+                                    <input type="text" ng-model="firm.firm_name" class="form-control" required 
+                                    name="firm_name"/>
+                                    <div ng-show="form.firm_name.$dirty && form.firm_name.$invalid">
+                                      <div ng-show="form.firm_name.$error.firm_name">Invalid Firm name.</div>
+                                      <div ng-show="form.firm_name.$error.required">Firm name is required.</div>
+                                    </div>
+
+                                   
+
+
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Company</label>
+                                    <input type="text" ng-model="firm.company_name" class="form-control" required name="company_name"/>
+                                    <div ng-show="form.company_name.$dirty && form.company_name.$invalid">
+                                      <div ng-show="form.company_name.$error.company_name">Invalid Company name.</div>
+                                      <div ng-show="form.company_name.$error.required">Comapny name is required.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Address Line 1</label>
+                                    <input type="text" ng-model="firm.address1" class="form-control" required 
+                                    name="address1"/>
+                                    <div ng-show="form.address1.$dirty && form.address1.$invalid">
+                                      <div ng-show="form.address1.$error.address1">Invalid Address line1.</div>
+                                      <div ng-show="form.address1.$error.required">Address line 1 is required.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Address Line 2</label>
+                                    <input type="text" ng-model="firm.address2" class="form-control"/>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label style="margin-right: 10%; width: 250px;">City</label>
+                                    <input type="text" ng-model="firm.city" class="form-control" required
+                                    name="city"/>
+                                     <div ng-show="form.city.$dirty && form.city.$invalid">
+                                      <div ng-show="form.city.$error.city">Invalid City.</div>
+                                      <div ng-show="form.city.$error.required">City is required.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Area</label>
+                                    <input type="text" ng-model="firm.area" class="form-control" required
+                                    name="area"/>
+                                    <div ng-show="form.area.$dirty && form.area.$invalid">
+                                      <div ng-show="form.area.$error.area">Invalid Area.</div>
+                                      <div ng-show="form.area.$error.required">Area is required.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label style="margin-right: 10%; width: 250px;">PostCode</label>
+                                    <input type="text" ng-model="firm.postcode" class="form-control" required 
+                                    name="postcode"/>
+                                    <div ng-show="form.postcode.$dirty && form.postcode.$invalid">
+                                      <div ng-show="form.postcode.$error.postcode">Invalid Postcode.</div>
+                                      <div ng-show="form.postcode.$error.required">Postcode is required.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Vehicle Types</label>
+                                    <input type="text" ng-model="firm.vehicle_types" class="form-control"/>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label style="margin-right: 10%; width: 250px;">No. of Drivers</label>
+                                    <input type="text" ng-model="firm.num_drivers" class="form-control"/>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-home"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Contact person Title:</label>
+                                    <input type="text" ng-model="firm.cp_title" class="form-control" required 
+                                    name="cp_title"/>
+                                    <div ng-show="form.cp_title.$dirty && form.cp_title.$invalid">
+                                      <div ng-show="form.cp_title.$error.cp_title">Invalid Contact person title.</div>
+                                      <div ng-show="form.cp_title.$error.required">Contact person title is required.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-earphone"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Contact person First name:</label>
+                                    <input type="text" ng-model="firm.cp_first_name" class="form-control" required 
+                                    name="cp_first_name"/>
+                                    <div ng-show="form.cp_first_name.$dirty && form.cp_first_name.$invalid">
+                                      <div ng-show="form.cp_first_name.$error.cp_first_name">Invalid Contact person's First name.</div>
+                                      <div ng-show="form.cp_first_name.$error.required">Contact person's First name is required.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Contact person Last Name:</label>
+                                    <input type="text" ng-model="firm.cp_last_name" class="form-control" required
+                                    name="cp_last_name"/>
+                                    <div ng-show="form.cp_last_name.$dirty && form.cp_last_name.$invalid">
+                                      <div ng-show="form.cp_last_name.$error.cp_last_name">Invalid Contact person's First name.</div>
+                                      <div ng-show="form.cp_last_name.$error.required">Contact person's First name is required.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-earphone"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Contact person Surname:</label>
+                                    <input type="text" ng-model="firm.cp_sur_name" class="form-control" required 
+                                    name="cp_sur_name"/>
+                                    <div ng-show="form.cp_sur_name.$dirty && form.cp_sur_name.$invalid">
+                                      <div ng-show="form.cp_sur_name.$error.cp_sur_name">Invalid Surname.</div>
+                                      <div ng-show="form.cp_sur_name.$error.required">Surname is required.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-earphone"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Contact person Telephone:</label>
+                                    <input type="text" ng-model="firm.cp_telephone" class="form-control" required 
+                                    ng-pattern="/^((0|\+44)7(5|6|7|8|9){1}\d{2}\s?\d{6})$/" placeholder="+447654321659" name="cp_telephone"/>
+                                    <div ng-show="form.cp_telephone.$dirty && form.cp_telephone.$invalid">
+                                      <div ng-show="form.cp_telephone.$error.cp_telephone">Invalid Telephone.</div>
+                                      <div ng-show="form.cp_telephone.$error.required">Telephone is required.</div>
+                                      <div ng-show="form.cp_telephone.$error.pattern">Invalid telephone pattern.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-earphone"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Job Allocation method:</label>
+                                    <input type="text" ng-model="firm.job_alloc" class="form-control" required 
+                                    name="job_alloc"/>
+                                    <div ng-show="form.job_alloc.$dirty && form.job_alloc.$invalid">
+                                      <div ng-show="form.job_alloc.$error.job_alloc">Invalid Job allocation method.</div>
+                                      <div ng-show="form.job_alloc.$error.required">Job allocation method is required.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-earphone"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Contact person Email:</label>
+                                    <input 
+                                       type="email" 
+                                       class="form-control" 
+                                       placeholder="Email"
+                                       name="email" 
+                                       ng-model="firm.cp_email"
+                                       ensure-unique-="email">
+                                <div ng-show="form.email.$dirty && form.email.$invalid">
+                                   <div ng-show="form.email.$error.email">Enter a valid Email.</div> 
+                                   <small class="error" ng-show="form.email.$error.unique">This Email is already registered, please try another</small> 
+                                </div>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-earphone"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Password</label>
+                                    <input 
+                                       type="password" 
+                                       name="password" 
+                                       ng-required=""
+                                       class="form-control" 
+                                       placeholder="Password should be alphanumeric"
+                                       ng-model="firm.cp_password"
+                                       ng-pattern="/^[a-z0-9]+$/i"
+                                       data-ng-minlength="8">
+                                       <div ng-show="form.password.$dirty && form.password.$invalid">
+                                         <div ng-show="form.password.$error.password">Invalid Password.</div>
+                                         <div ng-show="form.password.$error.required">Password is required.</div>
+                                         <div ng-show="form.password.$error.pattern">Password must be alphanumeric.</div>
+                                         <div ng-show="form.password.$error.minlength">Password is too short.</div>
+                                     </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div style="text-align:center;" class="dl-horizontal">
+                            <button type="button" ng-disabled="form.$dirty && form.$invalid"  ng-click="addFirm(firm)" class="btn btn-w-md btn-gap-v btn-line-primary">Add</button>
+                            <button type="button" ng-click="closeDialog()" class="btn btn-w-md btn-gap-v btn-line-success">Cancel</button>
+                        </div>
+                    </form>          
+                    </div>
+                </div>
+            </div>
+            Copyright 2014 {{main.brand}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,243 @@
+<style type="text/css">
+  tr.ng-scope.selected {
+    background: #2e9afe;
+}
+ tr.ng-scope.open {
+    background: #4dc78f;
+}
+tr.ng-scope.hold {
+    background: #2e9afe;
+}
+tr.ng-scope.noshow {
+    background: #D00000;
+}
+tr.ng-scope.route {
+    background: #bef781;
+}
+tr.ng-scope.cancel {
+    background: red;
+}
+tr.ng-scope.assign {
+    background: #7F55FF;
+}
+
+tr.ng-scope.future {
+     display: none;
+}
+.ng-scope.unhold {
+    background: none repeat scroll 0 0 #f2f5a9;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
+background-color: transparent; !important;
+}td.ng-binding {
+color: #FFF;
+}a.ng-binding {
+color: #FFF;
+}
+</style>
+
+<div class="page page-table" data-ng-controller="PastjobsCtrl">
+
+ <section class="panel panel-default table-dynamic">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Current Jobs </strong></div>
+
+        <div class="table-filters">
+            <div class="row">
+                <div class="col-sm-4 col-xs-6">
+                    <form>
+                        <input type="text"
+                               placeholder="search"
+                               class="form-control"
+                               data-ng-model="searchKeywords"
+                               data-ng-keyup="search()">
+                    </form>
+                </div>
+                <div class="col-sm-3 col-xs-6 filter-result-info">
+                    <span>
+                        Showing {{filteredStores.length}}/{{stores.length}} entries
+                    </span>              
+                </div>
+                <div class="col-sm-4 col-xs-6">
+             <button 
+                        ng-hide="loading" 
+                        ng-click="names()"
+                        class="btn btn-w-md btn-gap-v btn-success">Refresh</button>
+                        <div ng-hide="loading" class="form-group">
+                        </div>
+                        <div id="progressbar" ng-show="loading" >
+                            <section class="row signin-social text-center">
+                                <a href="javascript:;" class="btn-icon btn-icon-sm bg-twitter"><i style="margin-top: 0.5em;" class="fa fa-spin fa-spinner"></i></a>
+                            </section>  
+                        </div>
+            </div>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped table-responsive" >
+            <thead>
+                <tr>
+                    <th><div class="th">
+                        Job Number
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('name') "
+                              data-ng-class="{active: row == 'name'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-name') "
+                              data-ng-class="{active: row == '-name'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Pickup Time
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('price') "
+                              data-ng-class="{active: row == 'price'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-price') "
+                              data-ng-class="{active: row == '-price'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Pickup Location
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('sales') "
+                              data-ng-class="{active: row == 'sales'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-sales') "
+                              data-ng-class="{active: row == '-sales'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Destination
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('rating') "
+                              data-ng-class="{active: row == 'rating'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-rating') "
+                              data-ng-class="{active: row == '-rating'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Type of Car
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('rating') "
+                              data-ng-class="{active: row == 'rating'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-rating') "
+                              data-ng-class="{active: row == '-rating'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Price
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('rating') "
+                              data-ng-class="{active: row == 'rating'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-rating') "
+                              data-ng-class="{active: row == '-rating'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Job Status
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('rating') "
+                              data-ng-class="{active: row == 'rating'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-rating') "
+                              data-ng-class="{active: row == '-rating'}"></span>
+                    </div></th>
+                    <!--  <th><div class="th">
+                        Action
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('rating') "
+                              data-ng-class="{active: row == 'rating'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-rating') "
+                              data-ng-class="{active: row == '-rating'}"></span>
+                    </div></th> -->
+                </tr>
+            </thead>
+            <tbody>  
+                <tr 
+                   ng-repeat="items in currentPageStores" 
+                   ng-class="{open: items.job_status=='Completed',cancel: items.job_status=='Cancelled'}">
+                    <td>
+                       <span class="glyphicon glyphicon-eye-open"></span>
+                       <a  href="#/viewjobs/{{items._id}}" >{{items.jobNumber}}</a>
+                    </td>
+                    
+                    <td> {{items.booking_date}}</td>
+                    <td> {{items.pickup_address1}}  {{ items.pickup_address_area }}</td>
+                    <td> {{items.destination_line1}} {{ items.destination_city }}</td>
+                    <td> {{ items.vehicle_type }}</td>
+                    <td>&pound; {{ items.actual_price | number:2}}</td>
+                    <td>
+                       <li ng-show="([items.job_status])== 'Driver-En-Route'" class="btn btn-w-md btn-gap-v btn-success">
+                         {{ items.job_status }}
+                       </li>
+                       <li ng-show="([items.job_status])== 'Completed'" class="btn btn-w-md btn-gap-v btn-primary">
+                         {{ items.job_status }}
+                       </li>
+                       <li ng-show="([items.job_status])== 'Unhold'" class="btn btn-w-md btn-gap-v btn-success">
+                         {{ items.job_status }}
+                       </li>
+                       <li ng-show="([items.job_status])== 'Assigning Driver'" class="btn btn-w-md btn-gap-v btn-success">
+                         {{ items.job_status }}
+                       </li>
+                       <a   ng-show="([items.job_status])== 'Open'" ng-click="clickToOpen(items._id)">
+                       <li  class="btn btn-w-md btn-gap-v btn-info">
+                         {{ items.job_status }}
+                       </li></a>
+                       <li ng-show="([items.job_status])== 'No Show'" class="btn btn-w-md btn-gap-v btn-warning">
+                        {{ items.job_status }}
+                       </li>
+
+                       <li ng-show="([items.job_status])== 'Cancelled'" class="btn btn-w-md btn-gap-v btn-warning">
+                        {{ items.job_status }}
+                       </li>
+                    </td>
+                   <!--  <td>
+               <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-dark dropdown-toggle" type="button"> 
+                    Action <span class="caret"></span> 
+                </button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li ng-show="([items.job_status])== 'Open'||([items.job_status])=='Unhold'||([items.job_status]) == 'Assigning Driver'">
+                        <a ng-click="holdstatus(items._id)">Hold</a>
+                      </li>
+                      <li ng-show="([items.job_status])== 'Open'||([items.job_status])== 'Assigning Driver'||([items.job_status])== 'Driver-En-Route'">
+                        <a ng-click="holdstatus(items._id)">Cancel</a>
+                      </li>
+                      <li ng-show="([items.job_status]) == 'Hold'">
+                       <a ng-click="UnHoldstatus(items._id)">UnHold</a>
+                      </li>
+                     <li ng-show="([items.job_status])=='No Show'">
+                        <a ng-click="">No Show</a>
+                      </li>
+                      </ul>
+                   </div>
+                  </td> -->
+                </tr>
+            </tbody>
+        </table>
+    
+        <footer class="table-footer">
+            <div class="row">
+                <div class="col-md-6 page-num-info">
+                    <span>
+                        Show 
+                        <select data-ng-model="numPerPage"
+                                data-ng-options="num for num in numPerPageOpt"
+                                data-ng-change="onNumPerPageChange()">
+                        </select> 
+                        entries per page
+                    </span>
+                </div>
+                <div class="col-md-6 text-right pagination-container">
+                    <pagination class="pagination-sm"
+                                page="currentPage"
+                                total-items="filteredStores.length"
+                                max-size="4"
+                                on-select-page="select(page)"
+                                items-per-page="numPerPage"
+                                rotate="false"
+                                boundary-links="true"></pagination>
+                </div>
+            </div>
+        </footer>
+    </section>
+ 
+</div>

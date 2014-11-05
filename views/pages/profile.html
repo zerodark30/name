@@ -1,0 +1,331 @@
+<div class="page page-profile" data-ng-controller="profileCtrl">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-profile">
+                <div class="panel-heading text-center bg-info" ng-repeat="items in filteredStores">
+
+ 
+               <div collapse="isCollapsed">
+                 <!--<img   src="images/g1.jpg" class="img-circle img80_80">-->
+                 <img class="img-circle" style="height:120px;width:120px" src="{{ items.profile_url }}"  />
+               </div>
+               <br />
+               <button class=" btn btn-success" ng-click="isCollapsed = !isCollapsed">Show/Hide Image</button>
+               
+               <input 
+                type="file" 
+                ng-model="items.file"  
+                class="btn-warning"
+                id="fileInput"  
+                data-ui-file-upload="" 
+                title="Upload Image" 
+                style="left: -172.667px; top: 6.61667px;" 
+                onchange="angular.element(this).scope().upload(this)"
+                 >
+
+
+                   <h3> {{ items.FirstName }}</h3>
+                    <p> {{ items.Title }}</p>                    
+                </div>
+                <div class="list-justified-container">
+                    <ul class="list-justified text-center">
+                        <li>
+                            <p class="size-h3">{{vehicles}}</p>
+                            <p class="text-muted">Total Vehicles</p>
+                        </li>
+                        <li>
+                            <p class="size-h3">{{drivers}}</p>
+                            <p class="text-muted">Total Drivers</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>
+                  <span class="glyphicon glyphicon-th"></span> Account Info </strong>
+                </div>
+                <div class="panel-body">
+                    <div class="media">
+                        <div class="media-body">
+                          <form name="form" role="form" class="form-validation">
+                            <ul class="list-unstyled list-info" ng-repeat="items in filteredStores">
+                                 <li>
+                                    <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Email</label>
+                                    <input type="email"  class="form-control" placeholder="email" name="email" ng-model="items.email">
+                                </li>
+                                  <li>
+                                    <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Old Password</label>
+                                    <input type="password" class="form-control" name="password" ng-model="firm.old_password" ng-required="">
+                                </li>
+                                 <li>
+                                    <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>New Password</label>
+                                    <input type="password" class="form-control" placeholder="" name="new_password" 
+                                    data-ng-minlength="8" ng-pattern="/^[a-z0-9]+$/i" ng-required="" ng-model="firm.new_password">
+                                   <div 
+                                     ng-show="form.new_password.$dirty && form.new_password.$invalid
+                                     ">
+                                     <div ng-show="form.new_password.$error.new_password">Invalid Password.</div>
+                                     <div ng-show="form.new_password.$error.required">Password is required.</div>
+                                     <div ng-show="form.new_password.$error.pattern">Password must be alphanumeric.</div>
+                                     <div ng-show="form.new_password.$error.minlength">Password is too short.</div>
+                                  </div>
+                                  
+
+
+                                </li> 
+                                <li>    
+
+                                  <button type="submit" class="btn btn-primary" 
+                                ng-disabled="form.$dirty && form.$invalid || form.password.$error.required"  ng-click="update_user(items._id,items.email,firm)">Submit</button>
+
+
+                                </li>
+                              </ul>
+                          </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>
+                  <span class="glyphicon glyphicon-th"></span> Profile Info </strong>
+                </div>
+                <div class="panel-body">
+                    <div class="media">
+                        <div class="media-body">
+                            <ul class="list-unstyled list-info" ng-repeat="items in filteredStores">
+                             <li>
+                                <div ng-hide="editorEnabled">
+                                   <span class="icon glyphicon glyphicon-user"></span>
+                                    <label>Firm Name </label>
+                                      <a href="" ng-click="enableEditor()">{{ items.firm_name  || "empty" }}</a>
+                                </div>
+                                <div ng-show="editorEnabled">
+                                  <span class="icon glyphicon glyphicon-user"></span>
+                                    <label>Firm Name </label>
+                                      <input ng-show="editorEnabled" ng-model="items.firm_name">
+                                      <a href="" ng-click="saveFirm(items._id,items.firm_name)">Save</a>
+                                      or
+                                      <a href="" ng-click="disableEditor()">cancel</a>.
+                                </div>
+                             </li>
+                              <li>
+                                <div ng-hide="editorEnabled">
+                                   <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Owner Title</label>
+                                      <a href="" ng-click="enableEditor()">{{ items.owner_title  || "empty" }}</a>
+                                </div>
+                                <div ng-show="editorEnabled">
+                                  <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Owner Title</label>
+                                      <input  ng-show="editorEnabled" ng-model="items.owner_title">
+                                      <a href="" ng-click="saveTitle(items._id,items.owner_title)">Save</a>
+                                      or
+                                      <a href="" ng-click="disableEditor()">cancel</a>.
+                                </div>
+                              </li>
+                              <li>
+                                <div ng-hide="editorEnabled">
+                                   <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>First Name</label>
+                                      <a href="" ng-click="enableEditor()">{{ items.first_name  || "empty" }}</a>
+                                </div>
+                                <div ng-show="editorEnabled">
+                                  <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>First Name</label>
+                                      <input ng-model="items.first_name" ng-show="editorEnabled">
+                                      <a href="" ng-click="firstName(item._id,items.first_name)">Save</a>
+                                      or
+                                      <a href="" ng-click="disableEditor()">cancel</a>.
+                                </div>
+                              </li>
+                               <li>
+                                <div ng-hide="editorEnabled">
+                                  <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Last Name</label>
+                                      <a href="" ng-click="enableEditor()">{{ items.last_name  || "empty" }}</a>
+                                </div>
+                                <div ng-show="editorEnabled">
+                                  <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Last Name</label>
+                                      <input ng-model="items.last_name" ng-show="editorEnabled">
+                                      <a href="" ng-click="lastName(items._id,items.last_name)">Save</a>
+                                      or
+                                      <a href="" ng-click="disableEditor()">cancel</a>.
+                                </div>
+                              </li>
+                              <!--
+                              <li>
+                                <div ng-hide="editorEnabled">
+                                  <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Surname</label>
+                                      <a href="" ng-click="enableEditor()">{{ items.surname  || "empty" }}</a>
+                                </div>
+                                <div ng-show="editorEnabled">
+                                  <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Surname</label>
+                                    <input ng-model="items.surname" ng-show="editorEnabled">
+                                      <a href="" ng-click="surName(items._id,items.surname)">Save</a>
+                                      or
+                                      <a href="" ng-click="disableEditor()">cancel</a>.
+                                </div>
+                              </li>
+                              -->
+                              <!--
+                              <li>
+                                <div ng-hide="editorEnabled">
+                                  <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Firm No</label>
+                                      <a href="" ng-click="enableEditor()">{{ items.telephone  || "empty" }}</a>
+                                </div>
+                                <div ng-show="editorEnabled">
+                                  <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Telephone</label>
+                                    <input ng-model="items.telephone" ng-show="editorEnabled">
+                                      <a href="" ng-click="telephone(items._id,items.telephone)">Save</a>
+                                      or
+                                      <a href="" ng-click="disableEditor()">cancel</a>.
+                                </div>
+                              </li>
+                               -->
+
+
+
+                              <li>
+                                <div ng-hide="editorEnabled">
+                                  <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Telephone</label>
+                                      <a href="" ng-click="enableEditor()">{{ items.telephone  || "empty" }}</a>
+                                </div>
+                                <div ng-show="editorEnabled">
+                                  <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Telephone</label>
+                                    <input ng-model="items.telephone" ng-show="editorEnabled">
+                                      <a href="" ng-click="telephone(items._id,items.telephone)">Save</a>
+                                      or
+                                      <a href="" ng-click="disableEditor()">cancel</a>.
+                                </div>
+                              </li>
+                              <li>
+                                <div ng-hide="editorEnabled">
+                                   <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Company Name</label>
+                                      <a href="" ng-click="enableEditor()">{{ items.company_name  || "empty" }}</a>
+                                </div>
+                                <div ng-show="editorEnabled">
+                                 <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Company Name</label>
+                                    <input ng-model="items.company_name" ng-show="editorEnabled">
+                                      <a href="" ng-click="companyName(items._id,items.companyName)">Save</a>
+                                      or
+                                      <a href="" ng-click="disableEditor()">cancel</a>.
+                                </div>
+                              </li>
+                              <li>
+                                <div ng-hide="editorEnabled">
+                                   <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Address Line1</label>
+                                      <a href="" ng-click="enableEditor()">{{ items.address_line1  || "empty" }}</a>
+                                </div>
+                                <div ng-show="editorEnabled">
+                                 <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Address Line1</label>
+                                    <input ng-model="items.address_line1" ng-show="editorEnabled">
+                                      <a href="" ng-click="addressLine1(items._id,items.addressLine1)">Save</a>
+                                      or
+                                      <a href="" ng-click="disableEditor()">cancel</a>.
+                                </div>
+                              </li>
+                              <li>
+                                <div ng-hide="editorEnabled">
+                                   <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Address Line2</label>
+                                      <a href="" ng-click="enableEditor()">{{ items.address_line2  || "empty" }}</a>
+                                </div>
+                                <div ng-show="editorEnabled">
+                                 <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Address Line2</label>
+                                    <input ng-model="items.address_line2" ng-show="editorEnabled">
+                                      <a href="" ng-click="addressLine2()">Save</a>
+                                      or
+                                      <a href="" ng-click="disableEditor()">cancel</a>.
+                                </div>
+                              </li>
+                               <li>
+                                <div ng-hide="editorEnabled">
+                                   <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label>Area</label>
+                                      <a href="" ng-click="enableEditor()">{{ items.area  || "empty" }}</a>
+                                </div>
+                                <div ng-show="editorEnabled">
+                                 <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label>Area</label>
+                                    <input ng-model="items.area" ng-show="editorEnabled">
+                                      <a href="" ng-click="area(items._id,items.area)">Save</a>
+                                      or
+                                      <a href="" ng-click="disableEditor()">cancel</a>.
+                                </div>
+                              </li>
+                            <li>
+                                <div ng-hide="editorEnabled">
+                                   <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label>City</label>
+                                      <a href="" ng-click="enableEditor()">{{ items.city  || "empty" }}</a>
+                                </div>
+                                <div ng-show="editorEnabled">
+                                  <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label>City</label>
+                                    <input ng-model="items.city" ng-show="editorEnabled">
+                                      <a href="" ng-click="city(items._id,items.city)">Save</a>
+                                      or
+                                      <a href="" ng-click="disableEditor()">cancel</a>.
+                                </div>
+                              </li>
+                              <li>
+                                <div ng-hide="editorEnabled">
+                                   <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label>Post Code</label>
+                                      <a href="" ng-click="enableEditor()">{{ items.post_codes  || "empty" }}</a>
+                                </div>
+                                <div ng-show="editorEnabled">
+                                  <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label>City</label>
+                                    <input ng-model="items.post_codes" ng-show="editorEnabled">
+                                      <a href="" ng-click="postcodes(items._id,items.postcodes)">Save</a>
+                                      or
+                                      <a href="" ng-click="disableEditor()">cancel</a>.
+                                </div>
+                              </li>
+                              <li>
+                                  <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label>Vehicle Types</label>
+                                     {{ items.vehicles_types  || "empty" }}
+                              </li>
+                              <li>
+                                  <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label>Number of drivers</label>
+                                     {{ items.no_of_drivers  || "empty" }}
+                              </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label>Job Allocation Method</label>
+                                      {{ items.job_allocation_method  || "empty" }}
+                              </li>
+                                <li>
+                                     <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label>Last Month Total</label>
+                                      {{ items.last_month_total  || "empty" }}
+                              </li>
+                         </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

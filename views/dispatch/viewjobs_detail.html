@@ -1,0 +1,195 @@
+<div class="panel panel-default" data-ng-app="dispatch" data-ng-controller="jobDetail">
+    <div class="panel-heading">
+      <strong><span class="glyphicon glyphicon-th"></span> Current Jobs </strong>
+    </div>
+    <div class="panel-body">
+        <div class="media">
+
+
+
+
+<div class="row">
+                <div class="col-md-4">
+                  <div class="media-body">
+                    <ul class="list-unstyled list-info">
+                    <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Status</label>
+                        <a class="btn btn-primary btn-w-lg" href="javascript:;">{{dispatch.job_status}}</a>
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Job Number</label>
+                        {{dispatch._id}}
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Time Created</label>
+                        {{dispatch.job_create_date}}
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Price</label>
+                        &pound;{{dispatch.actual_price| number:2}}
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Tip</label>
+                        &pound;{{dispatch.tip_given| number:2}}
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Pickup Time</label>
+                        {{dispatch.actual_pickup_time}}
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Location Line1</label>
+                        {{dispatch.pickup_address1}}
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Location Area</label>
+                        {{dispatch.pickup_address_area}}
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Location City</label>
+                        {{dispatch.pickup_address_city}}
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Location Post</label>
+                        {{dispatch.pickup_address_postcode}}
+                    </li>
+                </ul></div>
+                    
+                </div>
+                <div class="col-md-4">
+                  <div class="media-body">
+                    <ul class="list-unstyled list-info">
+                    <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>ETA</label>
+                        {{}}
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Customer Name</label>
+                        {{customer.FirstName}} {{customer.LastName}}
+                    
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Customer's City</label>
+                        {{customer.AddressCity}}
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Rating</label>
+                        {{rating}}
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Vehicle</label>
+                        {{vehilce.make}} {{vehilce.model}} {{vehilce.registration_number}} 
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Destination Line1</label>
+                        {{dispatch.destination_line1}}
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Destination Area</label>
+                        {{dispatch.destination_area}}
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Destination City</label>
+                        {{dispatch.destination_city}}
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Destination Post</label>
+                        {{dispatch.destination_postcode}}
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Distance Trav</label>
+                        {{dispatch.distance_travelled}}
+                    </li>
+                </ul></div>
+                    
+                </div>
+                <div class="col-md-4">
+                    <p><a class="btn btn-primary btn-w-lg" href="javascript:;">Action</a></p>
+                    <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-dark dropdown-toggle" type="button"> Action <span class="caret"></span> </button>
+                <ul role="menu" class="dropdown-menu">
+                  <li ng-show="([dispatch.job_status])== 'Open'">
+                    <a ng-click="">Open</a>
+                  </li>
+                  <li ng-show="([dispatch.job_status]) == 'Hold'">
+                   <a ng-click="UnHoldstatus(dispatch._id)">UnHold</a>
+
+                  </li>
+                 <li ng-show="([dispatch.job_status])==''">
+                    <a ng-click="holdstatus(dispatch._id)">Hold</a>
+                  </li>
+                   <li ng-show="([dispatch.job_status])=='Unhold'">
+                    <a ng-click="holdstatus(dispatch._id)">Hold</a>
+                  </li>
+                  <li ng-show="([dispatch.job_status]) == 'Driver En Route'">
+                   <a ng-click="holdstatus(dispatch._id)">Hold</a>
+                  </li>
+                    <li><a ng-click="clickToOpen(dispatch._id)">Assign to</a></li>
+                </ul>
+            </div>
+                    <div>
+   
+                     <img class="img-circle" style="height:150px;width:150px" src=""  />
+                     
+                     <img class="img-circle" style="height:150px;width:150px" src="{{driver.driver_image}}"  />
+                     </div>
+                    
+               
+                </div>
+            </div>
+             
+             <div style="height:600px;width:600px">
+            <google-map id="map"
+                center="map.center"
+                pan="map.pan"
+                zoom="map.zoom"
+                draggable="true"
+                refresh="map.refresh"
+                options="map.options"
+                events="map.events"
+                bounds="map.bounds">
+                <polyline ng-repeat="p in map.polys" path="p.path" stroke="p.stroke" 
+                   fit="true"  icons='p.icons' >
+        </polyline>
+    </google-map>
+        
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+</div>
+

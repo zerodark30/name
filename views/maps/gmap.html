@@ -1,0 +1,70 @@
+  <div  ng-controller="mainCtrl">
+<div class="page page-table" data-ng-controller="listDrivrCtrl">
+ <section  data-ng-cloak>
+    <ul class="task-list list-unstyled">
+     <li>
+      <section class="panel panel-default table-dynamic">
+        <div class="panel-heading">
+          <strong><span class="glyphicon glyphicon-th"></span> Map </strong>
+          <ul style="float:right;position:relative;top:-6px;">
+          <li style="float:left;list-style: none outside none;border:1px solid #FFF"><a class="btn btn-info btn-direction" href="#/management"><strong>Drivers</strong></a></li>
+          <!--  <li style="float:left;list-style: none outside none;border:1px solid #FFF"><a class="btn btn-info btn-direction" href=""><strong>Vehicle</strong></a></li>
+          <li style="float:left;list-style: none outside none;border:1px solid #FFF"><a class="btn btn-info btn-direction" href="#/addDriver"><strong>Add Driver</strong></a></li>
+          <li style="float:left;list-style: none outside none;border:1px solid #FFF"><a class="btn btn-info btn-direction"href=""><strong>Requests</strong></a></li> -->
+        </ul>
+        </div>
+        
+<div class="row">
+   
+    <google-map class="col-md-12"
+                    center="map.center"
+                    zoom="map.zoom"
+                    dragging="map.dragging"
+                    draggable="true"
+                    control="map.control">
+
+            
+
+            <markers models="map.dynamicMarkers" coords="'self'" islabel="true"  icon="'icon'" click="'onClicked'"  fit='true'doCluster="true" clusterEvents="clusterEvents">
+                <windows show="'showWindow'"  closeClick="'closeClick'" ng-cloak>
+                   <div class="btn-group">
+                    <p ng-non-bindable >{{call_sign}} ({{ first_name}}  {{last_name}})</p>
+                    <p ng-non-bindable >Status: {{driver_id}}</p>
+                       <div>
+                    
+                        <a ng-non-bindable class="btn btn-primary btn-direction btn-left" href="#/editdriver/{{driver_id}}" data-ng-click="">View Driver</a>
+                        <a ng-non-bindable class="btn btn-primary btn-direction" href="#/viewDriverjob/{{driver_id}}" >View Job</a>
+                        <a ng-non-bindable class="btn btn-primary btn-direction"  href="#/messageDriver/{{driver_id}}">Message</a>
+                    </div>
+                    </div>
+
+                   
+                   
+
+                </windows>
+            </markers>
+            <markers models="map.dynamicMarkersJ" coords="'self'" islabel="true"  icon="'icon'" click="'onClicked'"  fit='true'doCluster="true" clusterEvents="clusterEvents">
+                <windows show="'showWindow'"  closeClick="'closeClick'" ng-cloak>
+                   <div class="btn-group">
+                   <p ng-non-bindable >{{job_id}}</p>
+                    <p ng-non-bindable >{{ first_name}}  {{last_name}} ({{pickup_time}})</p>
+                    <p ng-non-bindable >{{status}} ({{ETA}})</p>
+                    <p ng-non-bindable >Destination:{{destination1}},{{destination2}}</p>
+                       <div>
+                    
+                        <a ng-non-bindable class="btn btn-primary btn-direction btn-left" href="#/editdriver/{{driver_id}}" data-ng-click="">View Driver</a>
+                        <a ng-non-bindable class="btn btn-primary btn-direction" href="#/viewjobs/{{job_id}}" >View Job</a>
+                        <a ng-non-bindable class="btn btn-primary btn-direction"  href="#/messageJob/{{job_id}}">Message</a>
+                      
+                    </div>
+                    </div>
+
+                   
+                   
+
+                </window>
+            </markers>
+
+        </google-map>
+    </div>
+</div>

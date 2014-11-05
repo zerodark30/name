@@ -1,0 +1,189 @@
+<div class="page page-table" data-ng-controller="listDrivrCtrl">
+  <section class="panel panel-default table-dynamic">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> DRIVERS </strong>
+        <ul style="float:right;position:relative;top:-6px;">
+
+           <!-- <li style="float:left;list-style: none outside none;border:1px solid #FFF"><a class="btn btn-info btn-direction" href=""><strong>Vehicle</strong></a></li> -->
+           <li style="float:left;list-style: none outside none;border:1px solid #FFF"><a class="btn btn-info btn-direction" href="#/addDriver"><strong>Add Driver</strong></a></li>
+         <!--   <li style="float:left;list-style: none outside none;border:1px solid #FFF"><a class="btn btn-info btn-direction"href=""><strong>Requests</strong></a></li> -->
+        </ul>
+        </div>
+
+        <div class="table-filters">
+            <div class="row">
+                <div class="col-sm-4 col-xs-6">
+                    <form>
+                        <input type="text"
+                               placeholder="search"
+                               class="form-control"
+                               data-ng-model="searchKeywords"
+                               data-ng-keyup="search()">
+                    </form>
+                </div>
+                <div class="col-sm-3 col-xs-6 filter-result-info">
+                    <span>
+                        Showing {{filteredStores.length}}/{{stores.length}} entries
+                    </span>              
+                </div>
+                 <div class="col-sm-4 col-xs-6">
+             <button 
+                        ng-hide="loading" 
+                        ng-click="name()"
+                        class="btn btn-w-md btn-gap-v btn-success">Refresh</button>
+                        <div ng-hide="loading" class="form-group">
+                        </div>
+                        <div id="progressbar" ng-show="loading" >
+                            <section class="row signin-social text-center">
+                                <a href="javascript:;" class="btn-icon btn-icon-sm bg-twitter"><i style="margin-top: 0.5em;" class="fa fa-spin fa-spinner"></i></a>
+                            </section>  
+                        </div>
+            </div>
+
+            </div>
+        </div>
+        <table class="table table-bordered table-striped table-responsive" >
+            <thead>
+                <tr>
+                <th><div class="th">
+                        Driver Number
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('name') "
+                              data-ng-class="{active: row == 'name'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-name') "
+                              data-ng-class="{active: row == '-name'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Call Sign
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('name') "
+                              data-ng-class="{active: row == 'name'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-name') "
+                              data-ng-class="{active: row == '-name'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Driver Image
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('price') "
+                              data-ng-class="{active: row == 'price'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-price') "
+                              data-ng-class="{active: row == '-price'}"></span>
+                    </div></th>
+                    
+                    <th><div class="th">
+                        Name
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('rating') "
+                              data-ng-class="{active: row == 'rating'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-rating') "
+                              data-ng-class="{active: row == '-rating'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Rating
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('sales') "
+                              data-ng-class="{active: row == 'sales'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-sales') "
+                              data-ng-class="{active: row == '-sales'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Priority
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('rating') "
+                              data-ng-class="{active: row == 'rating'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-rating') "
+                              data-ng-class="{active: row == '-rating'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Status
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('rating') "
+                              data-ng-class="{active: row == 'rating'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-rating') "
+                              data-ng-class="{active: row == '-rating'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Action
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('rating') "
+                              data-ng-class="{active: row == 'rating'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-rating') "
+                              data-ng-class="{active: row == '-rating'}"></span>
+                    </div></th>
+                </tr>
+            </thead>
+            <tbody> 
+                <tr ng-repeat="items in currentPageStores">
+                    <td><a href="#/editdriver/{{items._id}}">{{items.DriverNumber}}</a></td>
+                    <td>
+                    {{items.call_sign}}</td>
+                    <td><img class='img-circle' src="{{items.driver_image}}" style="width:50px;"></td>
+                    <td>{{items.first_name}}  {{items.last_name}}</td>
+                    <td>
+                      <button  class="btn btn-dark" type="button"> 
+                        {{items.ratings_total/items.ratings | number : 1}}
+                      </button>
+
+                   </td>
+                   <!--  <td width="146px">
+                      {{items.current_location}}
+                    </td> -->
+                    <td width="146px">{{items.priority}}</td>
+                    <td width="146px">
+                      <a class="btn btn-primary btn-direction" href="javascript:;">
+                      {{items.driver_status}}</a>
+                    </td>
+                    <td width="250px">
+                     <div class="btn btn-primary btn-direction" ng-if="items.status == 'Active'">
+                      <a clas="btn btn-primary"
+                         ng-click="inactiveStatus(items._id)">Block</a>
+                      </div>
+                    <div class="btn btn-primary btn-direction"ng-if="items.status == 'Inactive'">
+                       <a
+                          ng-click="activateStatus(items._id)">Activate</a>
+                    </div>
+                    <div class="btn btn-primary btn-direction">
+                      <a href="#/editdriver/{{items._id}}">Edit</a>
+                    </div>
+                    <a class="btn btn-danger btn-direction"  ng-click="removeUser(items._id)">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <footer class="table-footer">
+            <div class="row">
+                <div class="col-md-6 page-num-info">
+                    <span>
+                        Show 
+                        <select data-ng-model="numPerPage"
+                                data-ng-options="num for num in numPerPageOpt"
+                                data-ng-change="onNumPerPageChange()">
+                        </select> 
+                        entries per page
+                    </span>
+                </div>
+                <div class="col-md-6 text-right pagination-container">
+                    <pagination class="pagination-sm"
+                                page="currentPage"
+                                total-items="filteredStores.length"
+                                max-size="4"
+                                on-select-page="select(page)"
+                                items-per-page="numPerPage"
+                                rotate="false"
+                                boundary-links="true"></pagination>
+                </div>
+            </div>
+        </footer>
+    </section>
+            </li>
+        </ul>
+    </section>
+</section>
+</div>

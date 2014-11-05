@@ -1,0 +1,114 @@
+<style>
+.name {
+  text-transform: capitalize;
+}.ngdialog-overlay {
+width: 98%;
+}
+</style>
+<div class="page">
+    <section class="panel panel-default">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>
+         Edit Vehicle</strong></div> 
+         <div class="panel-body" ng-controller="EditvehicleCtrl"> 
+                    <form name="form" role="form" class="form-validation">
+
+                         <input type="hidden"  ng-model="Vehicles._id">
+                          <div class="form-group">
+                            <label for="call_sign">Registration Number <span style="color:red"> * </span></label>
+                            <input
+                                required 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Registration Number"
+                                name="registration_number"
+                                ng-model="Vehicles.registration_number"
+                          >
+                          <div ng-show="form.registration_number.$dirty && form.registration_number.$invalid">
+                            <div ng-show="form.registration_number.$error.registration_number">Invalid Registration Number.</div>
+                            <div ng-show="form.registration_number.$error.required">Registration Number is required.
+                            </div>           
+                            </div>
+                    
+                        </div>
+
+                        <div class="form-group">
+                            <label for="first_name">Make<span style="color:red"> * </span></label>
+                            <input
+                               required 
+                               type="text" 
+                               class="form-control name"
+                               name="make" 
+                               placeholder="Make" 
+                               ng-model="Vehicles.make"
+                            >
+                            <div ng-show="form.make.$dirty && form.make.$invalid">
+                               <div ng-show="form.make.$error.make">Invalid Make.</div>
+                                <div ng-show="form.make.$error.required">Make is required.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="last_name">Model<span style="color:red"> * </span></label>
+                            <input 
+                               required
+                               type="text" 
+                               class="form-control" 
+                               placeholder="Model" 
+                               name="model"
+                               ng-model="Vehicles.model"
+                            >
+                            <div ng-show="form.model.$dirty && form.model.$invalid">
+                               <div ng-show="form.model.$error.model">Invalid Model.</div>
+                                <div ng-show="form.model.$error.required">Model is required.
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="color">Color <span style="color:red"></span></label>
+                           <input 
+                               type="color"
+                               name="color"
+                               class="form-control" 
+                               ng-model="Vehicles.color"
+                               
+                               >
+                            <div ng-show="form.color.$dirty && form.color.$invalid">
+                               <div ng-show="form.color.$error.color">Invalid Color.</div>
+                                <div ng-show="form.color.$error.required">Color is required.
+                                </div>
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <label for="Password">Type<span style="color:red">  </span></label>
+                            <input 
+                               type="text" 
+                               name="type" 
+                               ng-required=""
+                               class="form-control" 
+                               placeholder="Type"
+                               ng-model="Vehicles.type"
+                               
+                            >
+                           <div ng-show="form.type.$dirty && form.type.$invalid">
+                               <div ng-show="form.type.$error.type">Invalid Type.</div>
+                                <div ng-show="form.type.$error.required">Type is required.
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div>
+                   
+                       <input type="hidden" value="active" ng-model="Vehicles.active">
+                        <button type="submit" class="btn btn-primary" 
+                        ng-disabled="form.$dirty && form.$invalid"  ng-click="updatevehicles(Vehicles)">Update</button>
+                    </form>      
+         
+       </div>
+    </section>
+</div>

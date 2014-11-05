@@ -1,0 +1,59 @@
+ <style>
+.name {
+  text-transform: capitalize;
+}
+.form-group {
+    clear: both;
+    margin-bottom: 15px;
+    padding-bottom: 30px;
+}
+</style>
+<script>
+    function vehicleList() {
+      var e = document.getElementById("vehicle_list");
+      document.getElementById("vehicles").value = e.options[e.selectedIndex].text;
+    }
+</script>
+
+
+
+<div class="page" ng-controller="MessageJob">
+ <form name="form" role="form" class="form-validation">
+    <section class="panel panel-default">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>
+        Message for the Job</strong></div> 
+         <div class="panel-body"> 
+         <div class="col-md-6 ng-scope">
+       
+        
+
+   
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                              <label for="bio_description">Message <span style="color:red">  </span></label>
+                          </div>
+                         <div class="col-sm-3">
+                            <textarea 
+                            ng-model="driver.message"
+                              name="bio_description"
+                              class="form-control" 
+                              rows="4" 
+                              
+                              placeholder="Message" style="width:600px;">
+                            </textarea>
+                           
+     
+                          </div>
+                        
+                        </div>
+                        </div>
+                        
+    </section>
+    
+    <section> 
+      
+       <a ng-non-bindable class="btn btn-primary btn-direction btn-left"  href="#/map">Go Back</a>
+      <button type="submit" class="btn btn-info btn-w-lg" ng-disabled="form.$dirty && form.$invalid"  ng-click="send(driver)">Save</button>
+    </section>
+  </form>
+</div>

@@ -1,0 +1,128 @@
+<div class="page">
+    <section class="panel panel-default">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>
+         Add Driver</strong></div>
+       
+         <div class="panel-body" ng-controller="driverCtrl"> 
+                    <form name="form" role="form" ng-submit="addDriver(driver)">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Driver Name</label>
+                            <input 
+                             required type="text"   
+                             class="form-control"  
+                             placeholder="Driver Name" 
+                             name="drivername"
+                             ng-model="driver.drivername" 
+                             ng-minlength=3 
+                             ng-maxlength=20>
+                            <div ng-show="form.drivername.$dirty && form.drivername.$invalid">
+                              <div ng-show="form.drivername.$error.drivername">Invalid name</div>
+                              <div ng-show="form.drivername.$error.required">Your name is required</div>
+                              <div ng-show="form.drivername.$error.minlength">Your name must be greater then 3 characters</div>
+                              <div ng-show="form.drivername.$error.maxlength">Your name can not be greater then 20 characters</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Username</label>
+                            <input type="text" name="username"  class="form-control" id="" 
+                             placeholder="Username" ng-model="driver.username" ng-minlength="3" ng-maxlength="12">
+
+                             <div ng-show="form.username.$dirty && form.username.$invalid">
+                              <div ng-show="form.username.$error.required">Username is required</div>
+                              <div ng-show="form.username.$error.minlength">Username must be greater then 3 characters</div>
+                              <div ng-show="form.username.$error.maxlength">Username can not be greater then 20 characters</div>
+                            </div>
+
+
+                        </div>
+                         <div class="form-group">
+                            <label for="exampleInputEmail1">Password</label>
+                            <input type="password" name="password"  class="form-control" id="" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" ng-model="driver.password" ng-minlength="3" ng-maxlength="12">
+
+
+                             <div ng-show="form.password.$dirty && form.password.$invalid">
+                              <div ng-show="form.password.$error.required">Password is required</div>
+                              <div ng-show="form.password.$error.minlength">Password must be greater then 3 characters</div>
+                              <div ng-show="form.password.$error.maxlength">Password can not be greater then 20 characters</div>
+                            </div>
+
+
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Driver Image</label>
+                             <input class="btn-info" type="file" id="fileInput" data-ui-file-upload="" 
+                                      title="Choose File" style="left: -153.5px; top: 19.95px;"
+                                     ng-model="driver.file" app-filereader >
+                           
+                          <div class="space"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Drive Age</label>
+                            <input type="number" name="age" class="form-control" id="" placeholder="Drive Age" ng-model="driver.age" min=10 max=99>
+
+                            <div ng-show="form.age.$dirty && form.age.$invalid">
+                             <div ng-show="form.age.$error.min">You must be at least 10 years old</div>
+                             <div ng-show="form.age.$error.max">You are 100 or older? Really?</div>
+                            </div>
+
+                        </div>
+
+                         <div class="form-group">
+                            <label for="exampleInputPassword1">Vehicle</label>
+                            <input type="text" class="form-control" id="" placeholder="Vehicle" ng-model="driver.vehicle">
+                        </div>
+                        <!--
+                         <div class="form-group">
+                            <label for="exampleInputPassword1">ID No</label>
+                            <input type="text" class="form-control" id="" placeholder="ID No" ng-model="driver.idNo">
+                        </div>
+                        -->
+                         <div class="form-group">
+                            <label for="exampleInputPassword1">Phone No</label>
+                            <input type="number" name="phone" class="form-control" id="" placeholder="Phone No" ng-model="driver.phone" ng-minlength=9 ng-maxlength=14>
+
+                            <div ng-show="form.phone.$dirty && form.phone.$invalid">
+                             <div ng-show="form.phone.$error.minlength">Phone Field must contain at least 9 numbers</div>
+                             <div ng-show="form.phone.$error.maxlength">Phone Number can not exceed then 14 numbers</div>
+                            </div>
+
+                        </div>
+                         <div class="form-group">
+                         <dl class="dl-horizontal">
+                          <dt style="width:50px;">Gender</dt>
+                           <dd style="margin-left:75px;">
+                             <label class="ui-radio">
+                                <input name="radio1" type="radio" value="male" ng-model="driver.gender" >
+                                <span>Male</span>
+                              </label>
+                             <label class="ui-radio">
+                                 <input name="radio1" type="radio" value="female" checked ng-model="driver.gender">
+                                 <span>Female</span>
+                             </label>
+                           </dd>
+                        </dl>
+                        </div>
+                         
+                         <div class="form-group">
+                         <span class="ui-select">
+			                <select ng-model="driver.destination">
+			                    <option value="Destination1" selected>Destination1</option>
+			                    <option value="Destination2">Destination1</option>
+			                    <option value="Destination3">Destination3</option>
+			                </select>
+                         </span>
+
+                        </div>
+                         <div class="form-group">
+                            <label for="exampleInputPassword1">Information</label>
+                            <input type="text" class="form-control" id="" placeholder="Information" ng-model="driver.information">
+                        </div>
+                        <input type="hidden" value="active" ng-model="driver.active">
+                        <button type="submit" class="btn btn-primary" 
+                        ng-disabled="form.$dirty && form.$invalid">Submit</button>
+                    </form>      
+         
+       </div>
+    </section>
+</div>

@@ -1,0 +1,145 @@
+<style>
+
+.ngdialog.ngdialog-theme-plain .ngdialog-content {
+    background: rgba(255,255,255,.9);
+    padding: 0.2em 0.2em;
+    width: 845px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width:thick;
+    border-color: #5bc0de;
+}
+
+</style>
+
+
+    <div style="width: 800px;" class="container" ng-controller="FirmsDetailsCtrl">
+        <div style="width: 829px;margin-left:-29px;" class="page-err">
+            <div style="width: 829px;" class="err-message text-center">
+                <h2 >Firm details</h2>
+            </div>
+            <div style="width: 829px;" class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>
+                        <span class="glyphicon glyphicon-th"></span>
+                        Firm info!
+                    </strong>
+                </div>
+                <div class="panel-body">
+                    <div class="media">
+                        <div class="media-body">
+                          <ul class="list-unstyled list-info">
+                                
+                                <li>
+                                    <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Firm Name:</label>
+                                    <input type="text" ng-model="firm.firm_name"/>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Company</label>
+                                    <input type="text" ng-model="firm.company_name"/>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Address Line 1</label>
+                                    <input type="text" ng-model="firm.address_line1"/>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Address Line 2</label>
+                                    <input type="text" ng-model="firm.address_line2"/>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label style="margin-right: 10%; width: 250px;">City</label>
+                                    <input type="text" ng-model="firm.city"/>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Area</label>
+                                    <input type="text" ng-model="firm.area"/>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label style="margin-right: 10%; width: 250px;">PostCode</label>
+                                    <input type="text" ng-model="firm.post_codes"/>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Vehicle Types</label>
+                                    <input type="text" ng-model="firm.vehicle_types"/>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-flag"></span>
+                                    <label style="margin-right: 10%; width: 250px;">No. of Drivers</label>
+                                    <input type="text" ng-model="firm.number_of_drivers"/>
+                                </li>
+                               
+                                <li>
+                                    <span class="icon glyphicon glyphicon-home"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Contact person Title:</label>
+                                    <input type="text" ng-model="firm.owner_title"/>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-earphone"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Contact person First name:</label>
+                                    <input type="text" ng-model="firm.first_name"/>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-envelope"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Contact person Last Name:</label>
+                                    <input type="text" ng-model="firm.last_name"/>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-earphone"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Contact person Surname:</label>
+                                    <input type="text" ng-model="firm.surname"/>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-earphone"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Contact person Telephone:</label>
+                                    <input type="text" ng-model="firm.telephone"/>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-earphone"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Job Allocation method:</label>
+                                    <input type="text" ng-model="firm.job_allocation_method" ng-disabled="true"/>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-earphone"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Contact person Email:</label>
+                                    <input type="text" ng-model="firm.email" ng-disabled="true"/>
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-earphone"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Last Month Total:</label>
+                                    <input type="text" ng-model="firm.last_month_total" ng-disabled="true"/>
+                                </li>
+                                <!--
+                                <li>
+                                    <span class="icon glyphicon glyphicon-earphone"></span>
+                                    <label style="margin-right: 10%; width: 250px;">Password</label>
+                                    <input type="password" ng-model="firm.cp_password"/>
+                                </li>
+                                -->
+                            </ul>
+                        </div>
+                        <div style="text-align:center;" class="dl-horizontal">
+                            
+                            <button type="button" ng-click="updateFirm(firm)" class="btn btn-w-md btn-gap-v btn-line-primary">Save</button>
+                            <button type="button" ng-click="deleteFirm()" class="btn btn-w-md btn-gap-v btn-line-primary">Delete</button>
+                            <button type="button" ng-click="closeDialog()" class="btn btn-w-md btn-gap-v btn-line-success">Cancel</button>
+                        </div>
+                                    
+            
+                    </div>
+
+                </div>
+
+            </div>
+            Copyright 2014 {{main.brand}}
+        </div>
+    </div>
+</div>

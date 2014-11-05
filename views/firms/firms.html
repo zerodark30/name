@@ -1,0 +1,143 @@
+<div class="page page-table" data-ng-controller="FirmsCtrl">
+    <section class="panel panel-default table-dynamic">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Bordered table</strong></div>
+        <div ng-focus="focusCheck()">
+        </div>
+        <div class="table-filters">
+            <div class="row">
+                <div class="col-sm-4 col-xs-6">
+                    <form>
+                        <input type="text"
+                               placeholder="search"
+                               class="form-control"
+                               data-ng-model="searchKeywords"
+                               data-ng-keyup="search()">
+                    </form>
+                </div>
+                  <div class="col-sm-3 col-xs-6 filter-result-info">
+                    <span>
+                        Showing {{filteredStores.length}}/{{stores.length}} entries
+                    </span>              
+                </div>
+             <div class="col-sm-4 col-xs-6">
+             <button 
+                        ng-hide="loading" 
+                        ng-click="displayFirms()"
+                        class="btn btn-w-md btn-gap-v btn-success">Refresh</button>
+                        <button ng-click="addFirm()"class="btn btn-w-md btn-gap-v btn-info">Add Firm</button>
+                        <div ng-hide="loading" class="form-group">
+                        </div>
+                        <div id="progressbar" ng-show="loading" >
+                            <section class="row signin-social text-center">
+                                <a href="javascript:;" class="btn-icon btn-icon-sm bg-twitter"><i style="margin-top: 0.5em;" class="fa fa-spin fa-spinner"></i></a>
+                            </section>  
+                        </div>
+            </div>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th><div class="th">
+                        Firm ID
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('firm_id') "
+                              data-ng-class="{active: row == 'firm_id'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-firm_id') "
+                              data-ng-class="{active: row == '-firm_id'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Firm Name
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('firm_name') "
+                              data-ng-class="{active: row == 'firm_name'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-firm_name') "
+                              data-ng-class="{active: row == '-firm_name'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Company Name
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('company_name') "
+                              data-ng-class="{active: row == 'company_name'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-company_name') "
+                              data-ng-class="{active: row == '-company_name'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Address
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('address') "
+                              data-ng-class="{active: row == 'address'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-address') "
+                              data-ng-class="{active: row == '-address'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Vehicle Types
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('vehicle_types') "
+                              data-ng-class="{active: row == 'vehicle_types'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-vehicle_types') "
+                              data-ng-class="{active: row == '-vehicle_types'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Num. of drivers
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('num_drivers') "
+                              data-ng-class="{active: row == 'num_drivers'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-num_drivers') "
+                              data-ng-class="{active: row == '-num_drivers'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Last Month Total
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('last_month_total') "
+                              data-ng-class="{active: row == 'last_month_total'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-last_month_total') "
+                              data-ng-class="{active: row == '-last_month_total'}"></span>
+                    </div></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="store in filteredStores">
+                    <td><a ng-click="loadFirmDetails(store._id)">{{store._id}}</a></td>
+                    <td>{{store.firm_name}}</td>
+                    <td>{{store.company_name}}</td>
+                    <td>{{store.address_line1}}</td>
+                    <td>{{store.vehicle_types}}</td>
+                    <td>{{store.number_of_drivers}}</td>
+                    <td>{{store.last_month_total}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <footer class="table-footer">
+            <div class="row">
+                <div class="col-md-6 page-num-info">
+                    <span>
+                        Show 
+                        <select data-ng-model="numPerPage"
+                                data-ng-options="num for num in numPerPageOpt"
+                                data-ng-change="onNumPerPageChange()">
+                        </select> 
+                        entries per page
+                    </span>
+                </div>
+                <div class="col-md-6 text-right pagination-container">
+                    <pagination class="pagination-sm"
+                                page="currentPage"
+                                total-items="filteredStores.length"
+                                max-size="4"
+                                on-select-page="select(page)"
+                                items-per-page="numPerPage"
+                                rotate="false"
+                                boundary-links="true"></pagination>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>

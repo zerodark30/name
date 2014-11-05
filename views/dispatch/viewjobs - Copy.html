@@ -1,0 +1,576 @@
+<style>
+.list-info li label {
+ width: 250px;
+}
+</style>
+<div class="panel panel-default" data-ng-app="dispatch" data-ng-controller="dispatchJobs">
+    <div class="panel-heading">
+      <strong><span class="glyphicon glyphicon-th"></span> Current Jobs </strong>
+    </div>
+    <div class="panel-body">
+        <div class="media">
+            <div class="media-body">
+                <ul class="list-unstyled list-info">
+                    <li class="ng-binding">
+                        <span class="icon glyphicon glyphicon-user"></span>
+                        <label>Heading</label>
+                      {{dispatch.heading}}
+                    </li>
+                    <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Booking Method</label>
+                        {{dispatch.booking_method}}
+                    </li>
+                    <li>
+                        <span class="icon glyphicon glyphicon-home"></span>
+                        <label>Job Creation Date</label>
+                        {{dispatch.job_create_date}}
+                    </li>
+                    <li>
+                        <span class="icon glyphicon glyphicon-earphone"></span>
+                        <label>Multiple Booking Selected</label>
+                        {{dispatch.multiple_booking_selected}}
+                    </li>
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Booking Type</label>
+                        {{dispatch.booking_type}}
+                    </li>
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Vechicle Type</label>
+                        {{dispatch.vehicle_type}}
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Quick Booking</label>
+                        {{dispatch.quick_booking}}
+                    </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Firm Assigned</label>
+                        {{dispatch.firm_assigned}}
+                    </li>
+                    <div ng-show="dispatch.pickup_common"> 
+                        <li>
+                            <span class="icon glyphicon glyphicon-flag"></span>
+                            <label>Pickup Common</label>
+                            {{dispatch.pickup_common}}
+                        </li>
+                    </div>
+                    <div ng-show="dispatch.pickup_address1"> 
+                        <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Pickup Address 1</label>
+                        {{dispatch.pickup_address1}}
+                      </li>
+                    </div>
+                     <div ng-show="dispatch.pickup_address2">    
+                     <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Pickup Address2</label>
+                        {{dispatch.pickup_address2}}
+                    </li>
+                    </div>
+                     <div ng-show="dispatch.pickup_address_area">  
+                     <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Pickup Area</label>
+                        {{dispatch.pickup_address_area}}
+                    </li>
+                    </div>
+                     <div ng-show="dispatch.pickup_address_city">    
+                      <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Pickup City</label>
+                        {{dispatch.pickup_address_city}}
+                    </li>
+                    </div>
+                     <div ng-show="dispatch.pickup_address_postcode">    
+                      <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Pickup Postcode</label>
+                        {{dispatch.pickup_address_postcode}}
+                    </li>
+                    </div>
+                     <div ng-show="dispatch.pickup_address_location">    
+                      <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Pickup Address Location</label>
+                        {{dispatch.pickup_address_location}}
+                    </li>
+                    </div>
+                    <div ng-show="dispatch.destination_set">  
+                       <li>
+                          <span class="icon glyphicon glyphicon-flag"></span>
+                          <label>Destination Set</label>
+                          {{dispatch.destination_set}}
+                       </li>
+                   </div>
+                   <div ng-show="dispatch.destination_common"> 
+                     <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Destination Common</label>
+                        {{dispatch.destination_common}}
+                     </li>
+                   </div>
+                   <div ng-show="dispatch.destination_location"> 
+                     <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Destination Location</label>
+                        {{dispatch.destination_location}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.price_set"> 
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Price Set</label>
+                        {{dispatch.price_set}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.distance_travelled"> 
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Destination Travelled</label>
+                        {{dispatch.distance_travelled}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.actual_price"> 
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Actual Price</label>
+                        {{dispatch.actual_price}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.payment_method"> 
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Payment Method</label>
+                        {{dispatch.payment_method}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.card_token_id"> 
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Car Token ID</label>
+                        {{dispatch.card_token_id}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.email_confirmation"> 
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Email Confirmation</label>
+                        {{dispatch.email_confirmation}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.driver_id"> 
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Driver ID</label>
+                        {{dispatch.driver_id}}
+                    </li>
+                </div>
+                 <div ng-show="dispatch.actual_pickup_time"> 
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Actual Pickup Time</label>
+                        {{dispatch.actual_pickup_time}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.arrival_notification"> 
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Arrival Notification</label>
+                        {{dispatch.arrival_notification}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.arrival_text_sent"> 
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Arrival Text Sent</label>
+                        {{dispatch.arrival_text_sent}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.arrival_call_sent">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Arrival Call Sent</label>
+                        {{dispatch.arrival_call_sent}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.job_status">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Job Status</label>
+                        {{dispatch.job_status}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.destination_time">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Destination Time</label>
+                        {{dispatch.destination_time}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.tip_given">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Tip Given</label>
+                        {{dispatch.tip_given}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.additional_charges">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Additional Charges</label>
+                        {{dispatch.additional_charges}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.discount_given">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Discount Given</label>
+                        {{dispatch.discount_given}}
+                    </li>
+                </div>
+                 <div ng-show="dispatch.final_price">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Final Price</label>
+                        {{dispatch.final_price}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.rating_given">
+                      <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Rating Given</label>
+                        {{dispatch.rating_given}}
+                    </li>
+                </div>
+                 <div ng-show="dispatch.facebook_share">
+                      <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Facebook Share</label>
+                        {{dispatch.facebook_share}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.job_log">
+                      <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Job Log</label>
+                        {{dispatch.job_log}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point1_set">
+                      <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point 1 set</label>
+                        {{dispatch.via_point1_set}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point1_line1">
+                      <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point1 Line 1</label>
+                        {{dispatch.via_point1_line1}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point1_line2">
+                      <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point 1 Line2</label>
+                        {{dispatch.via_point1_line2}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point1_area">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point 1 Area</label>
+                        {{dispatch.via_point1_area}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point1_city">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point 1 City</label>
+                        {{dispatch.via_point1_city}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point1_postcode">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point 1 Postcode</label>
+                        {{dispatch.via_point1_postcode}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point1_location">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point 1 Location</label>
+                        {{dispatch.via_point1_location}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point2_set">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point2 set</label>
+                        {{dispatch.via_point2_set}}
+                    </li>
+                </div>
+                 <div ng-show="dispatch.via_point2_common">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point2 Common</label>
+                        {{dispatch.via_point2_common}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point2_line1">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point 2 Line 1</label>
+                        {{dispatch.via_point2_line1}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point2_line2">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point2 Line2</label>
+                        {{dispatch.via_point2_line2}}
+                    </li>
+                </div>
+                 <div ng-show="dispatch.via_point2_area">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point2 Area</label>
+                        {{dispatch.via_point2_area}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point2_city">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point2 City</label>
+                        {{dispatch.via_point2_city}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point2_postcode">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point2 Postcode</label>
+                        {{dispatch.via_point2_postcode}}
+                    </li>
+                </div>  
+                 <div ng-show="dispatch.via_point2_location">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point2 Location</label>
+                        {{dispatch.via_point2_location}}
+                    </li>
+                </div>  
+                <div ng-show="dispatch.via_point3_set">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point3 set</label>
+                        {{dispatch.via_point3_set}}
+                    </li> 
+                </div> 
+                <div ng-show="dispatch.via_point3_common">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point3 Common</label>
+                        {{dispatch.via_point3_common}}
+                    </li>
+                </div> 
+                <div ng-show="dispatch.via_point3_line1">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point3 Line1</label>
+                        {{dispatch.via_point3_line1}}
+                    </li> 
+                </div> 
+                <div ng-show="dispatch.via_point3_line2">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point3 Line2</label>
+                        {{dispatch.via_point3_line2}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point3_area">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point3 Area</label>
+                        {{dispatch.via_point3_area}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point3_city">
+                     <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point3 City</label>
+                        {{dispatch.via_point3_city}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point3_postcode">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point3 Postcode</label>
+                        {{dispatch.via_point3_postcode}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point3_location">
+                     <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point3 Location</label>
+                        {{dispatch.via_point3_location}}
+                    </li>
+                </div>
+                  <div ng-show="dispatch.via_point4_set">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point4 set</label>
+                        {{dispatch.via_point4_set}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point4_common">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point4 common</label>
+                        {{dispatch.via_point4_common}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point4_line1">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point4 Line1</label>
+                        {{dispatch.via_point4_line1}}
+                    </li>
+                </div>
+               <div ng-show="dispatch.via_point4_line2">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point4 Line2</label>
+                        {{dispatch.via_point4_line2}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point4_area">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point4 Area</label>
+                        {{dispatch.via_point4_area}}
+                    </li>
+                </div>
+               <div ng-show="dispatch.via_point4_city">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point4 City</label>
+                        {{dispatch.via_point4_city}}
+                    </li>
+                </div>
+ <div ng-show="dispatch.via_point4_postcode">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point4 Postcode</label>
+                        {{dispatch.via_point4_postcode}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point4_location">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point4 Location</label>
+                        {{dispatch.via_point4_location}}
+                    </li>
+                </div>
+<div ng-show="dispatch.via_point5_set">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point5 Set</label>
+                        {{dispatch.via_point5_set}}
+                    </li>
+                </div>
+<div ng-show="dispatch.via_point5_common">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point5 Common</label>
+                        {{dispatch.via_point5_common}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point5_line1">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point5 Line1</label>
+                        {{dispatch.via_point5_line1}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point5_line2">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point5 Line2</label>
+                        {{dispatch.via_point5_line2}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point5_area">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point5 Area</label>
+                        {{dispatch.via_point5_area}}
+                    </li>
+                </div>
+               <div ng-show="dispatch.via_point5_city">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point5 City</label>
+                        {{dispatch.via_point5_city}}
+                    </li>
+                </div>
+<div ng-show="dispatch.via_point5_postcode">
+                     <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point5 Postcode</label>
+                        {{dispatch.via_point5_postcode}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.via_point5_location">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Via Point5 Location</label>
+                        {{dispatch.via_point5_location}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.destination_line1">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Destination Line1</label>
+                        {{dispatch.destination_line1}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.destination_city">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Destination City</label>
+                        {{dispatch.destination_city}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.destination_postcode">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Destination Postcode</label>
+                        {{dispatch.destination_postcode}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.destination_line2">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Destination Line 2</label>
+                        {{dispatch.destination_line2}}
+                    </li>
+                </div>
+                <div ng-show="dispatch.booking_date">
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Booking Date</label>
+                        {{dispatch.booking_date}}
+                    </li>
+                </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
